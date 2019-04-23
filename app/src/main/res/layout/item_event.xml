@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     app:cardElevation="20dp"
     app:useCompatPadding = "true"
+    android:layout_margin="8dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 

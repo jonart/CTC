@@ -5,7 +5,7 @@ object UtilRandomCity {
             "Алжир","Амстердам","Берлин","Бангкок","Анкара","Афины","Барселона","Бостон","Будапешт",
             "Вена","Гавана")
     fun randCity():String{
-        val rand = (0..15).random()
+        val rand = (0 until city.size).random()
         return city[rand]
     }
 }
