@@ -1,4 +1,4 @@
-package ru.evgeniy.ctc.delegate
+package ru.evgeniy.ctc.delegate.Adapter
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -9,10 +9,10 @@ import ru.evgeniy.ctc.R
 import ru.evgeniy.ctc.models.Item
 import ru.evgeniy.ctc.models.Move
 
-class MoveAdapterDelegate:ItemAdapterDelegate() {
+class MoveAdapterDelegate() : ItemAdapterDelegate() {
 
-    override fun onCreateViewHolder(viewGroup: ViewGroup, inflater: LayoutInflater): RecyclerView.ViewHolder {
-        return MoveViewHolder(inflater.inflate(R.layout.item_move,viewGroup,false))
+    override fun onCreateViewHolder(viewGroup: ViewGroup): RecyclerView.ViewHolder {
+        return MoveViewHolder(LayoutInflater.from(viewGroup.context).inflate(R.layout.item_move, viewGroup, false))
     }
 
     override fun isForViewType(items: List<Item>, position: Int): Boolean = items[position] is Move
@@ -27,8 +27,8 @@ class MoveAdapterDelegate:ItemAdapterDelegate() {
 
     private class MoveViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val from:TextView = itemView.findViewById(R.id.tv_from)
-        val to:TextView = itemView.findViewById(R.id.tv_to)
-        val interval:TextView = itemView.findViewById(R.id.tv_interval)
+        val from: TextView = itemView.findViewById(R.id.tv_from)
+        val to: TextView = itemView.findViewById(R.id.tv_to)
+        val interval: TextView = itemView.findViewById(R.id.tv_interval)
     }
 }

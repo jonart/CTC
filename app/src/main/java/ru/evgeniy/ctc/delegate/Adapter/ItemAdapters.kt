@@ -1,14 +1,13 @@
-package ru.evgeniy.ctc.delegate
+package ru.evgeniy.ctc.delegate.Adapter
 
+import android.support.v4.app.FragmentManager
 import android.support.v7.widget.RecyclerView
-import android.util.SparseArray
 import android.view.ViewGroup
 import ru.evgeniy.ctc.models.Item
-import ru.evgeniy.ctc.models.Move
 
-class ItemAdapters(private val clickListener:(Item)->Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ItemAdapters(fragmentManager: FragmentManager) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val delegates = listOf(MoveAdapterDelegate(),EventAdapterDelegate(),NoticeAdapterDelegate())
+    private val delegates = listOf(MoveAdapterDelegate(), EventAdapterDelegate(), NoticeAdapterDelegate(fragmentManager))
 
     var items:List<Item> = emptyList()
     set(value) {
@@ -28,9 +27,6 @@ class ItemAdapters(private val clickListener:(Item)->Unit) : RecyclerView.Adapte
 
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
         delegates[getItemViewType(position)].onBindViewHolder(viewHolder,items,position)
-        viewHolder.itemView.setOnClickListener {
-            clickListener.invoke(items[position])
-        }
     }
 
 }
