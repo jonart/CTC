@@ -1,18 +1,17 @@
 package ru.evgeniy.ctc.delegate.adapter
 
-import android.support.v4.app.FragmentManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import ru.evgeniy.ctc.ItemClick
 import ru.evgeniy.ctc.R
 import ru.evgeniy.ctc.UtilDate
-import ru.evgeniy.ctc.fragments.EventDetailsFragment
 import ru.evgeniy.ctc.models.Event
 import ru.evgeniy.ctc.models.Item
 
-class EventAdapterDelegate(private val fragmentManager: FragmentManager) : ItemAdapterDelegate() {
+class EventAdapterDelegate(private val itemClick: ItemClick) : ItemAdapterDelegate() {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup): RecyclerView.ViewHolder {
         return EventViewHolder(LayoutInflater.from(viewGroup.context).inflate(R.layout.item_event, viewGroup, false))
@@ -27,10 +26,7 @@ class EventAdapterDelegate(private val fragmentManager: FragmentManager) : ItemA
         vh.endTime.text = UtilDate.formatDate(event.endTime)
         vh.name.text = event.name
         vh.itemView.setOnClickListener {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.root_frame, EventDetailsFragment.newInstance(event))
-                    .addToBackStack(null)
-                    .commit()
+            itemClick.onItemClick(event)
         }
     }
 

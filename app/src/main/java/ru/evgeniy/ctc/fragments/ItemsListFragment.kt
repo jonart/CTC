@@ -7,15 +7,17 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_items_list.*
+import ru.evgeniy.ctc.ItemClick
 import ru.evgeniy.ctc.R
 import ru.evgeniy.ctc.delegate.adapter.ItemAdapters
+import ru.evgeniy.ctc.models.Event
 import ru.evgeniy.ctc.models.Item
+import ru.evgeniy.ctc.models.Move
+import ru.evgeniy.ctc.models.Notice
 
-class ItemsListFragment : Fragment() {
+class ItemsListFragment : Fragment(), ItemClick {
     companion object {
-        private val gson = Gson()
         private lateinit var adapter: ItemAdapters
     }
 
@@ -32,14 +34,41 @@ class ItemsListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        adapter = ItemAdapters(requireFragmentManager())
+        adapter = ItemAdapters(this)
         val rand = (10..100).random()
         adapter.items = generateItems(rand)
         retainInstance = true
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        activity?.title = getString(R.string.app_name)
     }
 
     private fun generateItems(count: Int): List<Item> {
         return (10..count).map { Item.createRandInstance() }
     }
 
+    override fun onItemClick(item: Item) {
+        when (item) {
+            is Move -> {
+                requireFragmentManager().beginTransaction()
+                        .replace(R.id.root_frame, MoveDetailsFragment.newInstance(item))
+                        .addToBackStack(null)
+                        .commit()
+            }
+            is Event -> {
+                requireFragmentManager().beginTransaction()
+                        .replace(R.id.root_frame, EventDetailsFragment.newInstance(item))
+                        .addToBackStack(null)
+                        .commit()
+            }
+            is Notice -> {
+                requireFragmentManager().beginTransaction()
+                        .replace(R.id.root_frame, NoticeDetailsFragment.newInstance(item))
+                        .addToBackStack(null)
+                        .commit()
+            }
+        }
+    }
 }

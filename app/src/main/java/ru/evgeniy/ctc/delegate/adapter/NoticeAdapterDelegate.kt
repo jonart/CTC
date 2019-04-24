@@ -1,18 +1,17 @@
 package ru.evgeniy.ctc.delegate.adapter
 
-import android.support.v4.app.FragmentManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import ru.evgeniy.ctc.ItemClick
 import ru.evgeniy.ctc.R
 import ru.evgeniy.ctc.UtilDate
-import ru.evgeniy.ctc.fragments.NoticeDetailsFragment
 import ru.evgeniy.ctc.models.Item
 import ru.evgeniy.ctc.models.Notice
 
-class NoticeAdapterDelegate(private val fragmentManager: FragmentManager) : ItemAdapterDelegate() {
+class NoticeAdapterDelegate(private val itemClick: ItemClick) : ItemAdapterDelegate() {
     override fun onCreateViewHolder(viewGroup: ViewGroup): RecyclerView.ViewHolder {
         return NoticeViewHolder(LayoutInflater.from(viewGroup.context).inflate(R.layout.item_notice, viewGroup, false))
     }
@@ -25,10 +24,7 @@ class NoticeAdapterDelegate(private val fragmentManager: FragmentManager) : Item
         vh.flightDate.text = UtilDate.formatDate(notice.flightDate)
         vh.gate.text = notice.gate
         vh.itemView.setOnClickListener {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.root_frame, NoticeDetailsFragment.newInstance(notice))
-                    .addToBackStack(null)
-                    .commit()
+            itemClick.onItemClick(notice)
         }
     }
 

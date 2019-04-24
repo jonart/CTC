@@ -7,7 +7,7 @@ import ru.evgeniy.ctc.fragments.ItemsListFragment
 
 
 class MainActivity : AppCompatActivity() {
-
+    private val fragmentManager = supportFragmentManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -15,9 +15,18 @@ class MainActivity : AppCompatActivity() {
 
 
         if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
+            fragmentManager.beginTransaction()
                     .replace(R.id.root_frame, ItemsListFragment())
                     .commit()
+        }
+    }
+
+    override fun onBackPressed() {
+        if (fragmentManager.backStackEntryCount <= 0) {
+            finish()
+            return
+        } else {
+            fragmentManager.popBackStack()
         }
     }
 }

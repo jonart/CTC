@@ -34,6 +34,11 @@ class MoveDetailsFragment : Fragment() {
         retainInstance = true
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        activity?.title = getString(R.string.move)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val move = arguments?.getParcelable<Move>(MOVE_KEY)!!
