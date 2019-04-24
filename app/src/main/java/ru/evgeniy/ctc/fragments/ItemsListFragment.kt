@@ -53,18 +53,10 @@ class ItemsListFragment : Fragment(), ItemClick {
 
     override fun onItemClick(item: Item) {
         val fragment: Fragment = when (item) {
-            is Move -> {
-                MoveDetailsFragment.newInstance(item)
-            }
-            is Event -> {
-                EventDetailsFragment.newInstance(item)
-            }
-            is Notice -> {
-                NoticeDetailsFragment.newInstance(item)
-            }
-            else -> {
-                throw Exception("Fragment was not Found")
-            }
+            is Move -> MoveDetailsFragment.newInstance(item)
+            is Event -> EventDetailsFragment.newInstance(item)
+            is Notice -> NoticeDetailsFragment.newInstance(item)
+            else -> throw Exception("Fragment was not Found")
         }
         goToFragment(fragment)
     }
