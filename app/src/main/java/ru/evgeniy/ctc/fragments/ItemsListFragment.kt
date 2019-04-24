@@ -7,12 +7,17 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_items_list.*
 import ru.evgeniy.ctc.R
-import ru.evgeniy.ctc.delegate.Adapter.ItemAdapters
+import ru.evgeniy.ctc.delegate.adapter.ItemAdapters
 import ru.evgeniy.ctc.models.Item
 
 class ItemsListFragment : Fragment() {
+    companion object {
+        private val gson = Gson()
+        private lateinit var adapter: ItemAdapters
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -22,13 +27,19 @@ class ItemsListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recycler.layoutManager = LinearLayoutManager(requireContext())
-        val adapter = ItemAdapters(requireFragmentManager())
+        recycler.adapter = adapter
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        adapter = ItemAdapters(requireFragmentManager())
         val rand = (10..100).random()
         adapter.items = generateItems(rand)
-        recycler.adapter = adapter
+        retainInstance = true
     }
 
     private fun generateItems(count: Int): List<Item> {
         return (10..count).map { Item.createRandInstance() }
     }
+
 }
