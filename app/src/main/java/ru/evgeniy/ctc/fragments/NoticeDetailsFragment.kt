@@ -33,6 +33,11 @@ class NoticeDetailsFragment : Fragment() {
         retainInstance = true
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        activity?.title = getString(R.string.notice)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val notice = arguments?.getParcelable<Notice>(NOTICE_KEY)!!

@@ -9,4 +9,7 @@
     <string name="flightInAir">Продолжительность полёта: </string>
     <string name="date">Дата: </string>
     <string name="gate">Выход: </string>
+    <string name="notice">Notice</string>
+    <string name="move">Move</string>
+    <string name="event">Event</string>
 </resources>

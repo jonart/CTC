@@ -33,6 +33,11 @@ class EventDetailsFragment : Fragment() {
         retainInstance = true
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        activity?.title = getString(R.string.event)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val event = arguments?.getParcelable<Event>(EVENT_KEY)!!
