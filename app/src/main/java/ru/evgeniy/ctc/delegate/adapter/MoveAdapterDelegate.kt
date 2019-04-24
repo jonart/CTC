@@ -1,15 +1,17 @@
-package ru.evgeniy.ctc.delegate.Adapter
+package ru.evgeniy.ctc.delegate.adapter
 
+import android.support.v4.app.FragmentManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import ru.evgeniy.ctc.R
+import ru.evgeniy.ctc.fragments.MoveDetailsFragment
 import ru.evgeniy.ctc.models.Item
 import ru.evgeniy.ctc.models.Move
 
-class MoveAdapterDelegate() : ItemAdapterDelegate() {
+class MoveAdapterDelegate(private val fragmentManager: FragmentManager) : ItemAdapterDelegate() {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup): RecyclerView.ViewHolder {
         return MoveViewHolder(LayoutInflater.from(viewGroup.context).inflate(R.layout.item_move, viewGroup, false))
@@ -23,6 +25,12 @@ class MoveAdapterDelegate() : ItemAdapterDelegate() {
         vh.from.text = move.fromPlace
         vh.to.text = move.toPlace
         vh.interval.text = move.estimateTime.toString()
+        vh.itemView.setOnClickListener {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.root_frame, MoveDetailsFragment.newInstance(move))
+                    .addToBackStack(null)
+                    .commit()
+        }
     }
 
     private class MoveViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

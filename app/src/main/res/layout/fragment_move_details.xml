@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/StandardPadding"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fragments.NoticeDetailsFragment">
+    style="@style/StandardPadding"
+    tools:context=".fragments.MoveDetailsFragment">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -15,10 +15,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/date" />
+            android:text="@string/fromCity" />
 
         <TextView
-            android:id="@+id/date"
+            android:id="@+id/from"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -31,13 +31,28 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/gate" />
+            android:text="@string/toCity" />
 
         <TextView
-            android:id="@+id/gate"
+            android:id="@+id/to"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/flightInAir" />
+
+        <TextView
+            android:id="@+id/timeInAir"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
 </LinearLayout>

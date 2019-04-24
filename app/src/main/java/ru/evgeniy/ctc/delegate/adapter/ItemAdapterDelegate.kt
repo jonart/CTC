@@ -1,7 +1,6 @@
-package ru.evgeniy.ctc.delegate.Adapter
+package ru.evgeniy.ctc.delegate.adapter
 
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
 import android.view.ViewGroup
 import ru.evgeniy.ctc.models.Item
 

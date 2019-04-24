@@ -1,4 +1,4 @@
-package ru.evgeniy.ctc.delegate.Adapter
+package ru.evgeniy.ctc.delegate.adapter
 
 import android.support.v4.app.FragmentManager
 import android.support.v7.widget.RecyclerView
@@ -7,7 +7,7 @@ import ru.evgeniy.ctc.models.Item
 
 class ItemAdapters(fragmentManager: FragmentManager) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val delegates = listOf(MoveAdapterDelegate(), EventAdapterDelegate(), NoticeAdapterDelegate(fragmentManager))
+    private val delegates = listOf(MoveAdapterDelegate(fragmentManager), EventAdapterDelegate(fragmentManager), NoticeAdapterDelegate(fragmentManager))
 
     var items:List<Item> = emptyList()
     set(value) {

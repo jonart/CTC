@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">CTC</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="startTime">Вылет: </string>
+    <string name="endTime">Приземление: </string>
+    <string name="flightTime">Рейс: </string>
+    <string name="fromCity">Город вылета: </string>
+    <string name="toCity">Город прилета: </string>
+    <string name="flightInAir">Продолжительность полёта: </string>
+    <string name="date">Дата: </string>
+    <string name="gate">Выход: </string>
 </resources>

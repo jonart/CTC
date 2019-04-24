@@ -1,4 +1,4 @@
-package ru.evgeniy.ctc.delegate.Adapter
+package ru.evgeniy.ctc.delegate.adapter
 
 import android.support.v4.app.FragmentManager
 import android.support.v7.widget.RecyclerView
