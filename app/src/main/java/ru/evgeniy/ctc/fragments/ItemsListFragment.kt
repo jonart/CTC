@@ -15,6 +15,8 @@ import ru.evgeniy.ctc.models.Event
 import ru.evgeniy.ctc.models.Item
 import ru.evgeniy.ctc.models.Move
 import ru.evgeniy.ctc.models.Notice
+import java.lang.Exception
+import java.lang.IllegalStateException
 
 class ItemsListFragment : Fragment(), ItemClick {
     companion object {
@@ -50,25 +52,27 @@ class ItemsListFragment : Fragment(), ItemClick {
     }
 
     override fun onItemClick(item: Item) {
-        when (item) {
+        val fragment: Fragment = when (item) {
             is Move -> {
-                requireFragmentManager().beginTransaction()
-                        .replace(R.id.root_frame, MoveDetailsFragment.newInstance(item))
-                        .addToBackStack(null)
-                        .commit()
+                MoveDetailsFragment.newInstance(item)
             }
             is Event -> {
-                requireFragmentManager().beginTransaction()
-                        .replace(R.id.root_frame, EventDetailsFragment.newInstance(item))
-                        .addToBackStack(null)
-                        .commit()
+                EventDetailsFragment.newInstance(item)
             }
             is Notice -> {
-                requireFragmentManager().beginTransaction()
-                        .replace(R.id.root_frame, NoticeDetailsFragment.newInstance(item))
-                        .addToBackStack(null)
-                        .commit()
+                NoticeDetailsFragment.newInstance(item)
+            }
+            else -> {
+                throw Exception("Fragment was not Found")
             }
         }
+        goToFragment(fragment)
+    }
+
+    private fun goToFragment(fragment: Fragment) {
+        requireFragmentManager().beginTransaction()
+                .replace(R.id.root_frame, fragment)
+                .addToBackStack(null)
+                .commit()
     }
 }
