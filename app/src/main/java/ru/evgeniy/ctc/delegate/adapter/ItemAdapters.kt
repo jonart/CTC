@@ -26,7 +26,7 @@ class ItemAdapters(itemClick: ItemClick) : RecyclerView.Adapter<RecyclerView.Vie
     override fun getItemCount():Int = items.size
 
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
-        delegates[getItemViewType(position)].onBindViewHolder(viewHolder,items,position)
+        delegates[viewHolder.itemViewType].onBindViewHolder(viewHolder, items, position)
     }
 
 }
